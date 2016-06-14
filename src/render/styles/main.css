@@ -1,11 +1,16 @@
 html {
+	font-size: 18px;
+}
+
+body {
 	font-size: 16px;
 }
 
 .ui.main.container {
 	margin-top: 7em;
+	margin-bottom: 5em;
 }
 
 .issue.segment .result {
-	margin-left: 5em;
+	margin-left: 30px;
 }

@@ -13,67 +13,62 @@
 		</div>
 	</div>
 	<div class="ui main container">
-	<div class="ui raised issue segment">
-		<h3>
-			<span class="ui <%= @statusC[@document.status] %> ribbon label"> <%= @document.status %> </span>
-			<span> <%= @document.title %> </span>
-		</h3>
-		<div class="ui list">
-			<div class="item">
-				<div class="header"> 原文 </div>
-				<div class="description"> <%= @document.src %> </div>
+		<div class="ui raised issue segment">
+			<h3>
+				<span class="ui <%= @statusC[@document.status] %> ribbon label"> <%= @document.status %> </span>
+				<span> <%= @document.title %> </span>
+			</h3>
+			<div class="ui list">
+				<div class="item">
+					<div class="header"> 原文 </div>
+					<div class="description"> <%= @document.src %> </div>
+				</div>
+				<% if @document.status == '已釐清' : %>
+					<div class="item">
+						<div class="header"> 結果 </div>
+						<div class="description"> <%= @document.result %> </div>
+					</div>
+					<div class="item">
+						<div class="header"> 解釋 </div>
+						<div class="description"> 
+							<%- @document.reason %>
+						</div>
+					</div>
+					<div class="item">
+						<div class="header"> 出處 </div>
+						<div class="description">
+							<%- @document.reasonSrc %>
+						</div>
+					</div>
+				<% else if @document.status == '初步進展，待後續釐清': %>
+					<div class="item">
+						<div class="header"> 目前狀況 </div>
+						<div class="description"> 
+							<%- @document.comment %>
+						</div>
+					</div>
+					<div class="item">
+						<div class="header"> 出處 </div>
+						<div class="description"> 
+							<%- @document.commentSrc %>
+						</div>
+					</div>
+				<% end %>
 			</div>
-			<% if @document.status == '已釐清' : %>
-				<div class="item">
-					<div class="header"> 結果 </div>
-					<div class="description"> <%= @document.result %> </div>
-				</div>
-				<div class="item">
-					<div class="header"> 解釋 </div>
-					<div class="description"> 
-						<ol>
-							<% for item in @document.reason: %>
-							<li> <%= item %> </li>
-							<% end %>
-						</ol>
-					</div>
-				</div>
-				<div class="item">
-					<div class="header"> 出處 </div>
-					<div class="description">
-						<ol>
-							<% for item in @document.reasonSrc: %>
-							<li> <%= item %> </li>
-							<% end %>
-						</ol>
-					</div>
-				</div>
-			<% else if @document.status == '初步進展，待後續釐清': %>
-				<div class="item">
-					<div class="header"> 目前狀況 </div>
-					<div class="description"> 
-						<ol>
-							<% for item in @document.comment: %>
-							<li> <%= item %> </li>
-							<% end %>
-						</ol>
-					</div>
-				</div>
-				<div class="item">
-					<div class="header"> 出處 </div>
-					<div class="description"> 
-						<ol>
-							<% for item in @document.commentSrc: %>
-							<li> <%= item %> </li>
-							<% end %>
-						</ol>
-					</div>
-				</div>
-
-			<% end %>
+		</div>
+		<div class="ui basic segment">
+			<div class="fb-comments" data-href="<% @document.url %>" data-width="100%"></div>
 		</div>
 	</div>
-	</div>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.6&appId=238718126925";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
 </body>
 
 </html>
