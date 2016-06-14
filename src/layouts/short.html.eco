@@ -1,0 +1,11 @@
+<div class="ui raised issue segment">
+	<h4><a title="<%= page.title %>" href="<%= page.url %>">
+		<span class="ui <%= @statusC[page.status] %> ribbon label"> <%= page.status %> </span>
+		<span> <%= page.title %> </span>
+		<i class="linkify icon"></i>
+	</a></h4>
+	<% if page.status == '已釐清': %>
+		<span class="result"> 結果：<%= page.result %> </span>
+	<% end %>
+</div>
+

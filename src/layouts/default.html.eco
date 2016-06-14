@@ -1,0 +1,63 @@
+<html>
+<head>
+	<title> <%= @site.title %> </title>
+	<%- @getBlock("meta").toHTML() %>
+    <%- @getBlock("styles").add(['/styles/semantic.css', '/styles/main.css']).toHTML() %>
+</head>
+<body>
+	<div class="ui fixed inverted menu">
+		<div class="ui container">
+			<div class="header item"> <%= @site.title %> </div>
+			<a class="active item" href="/"> 所有爭點 </a>
+			<a class="item" href="/about.html"> 關於我 </a>
+		</div>
+	</div>
+	<div class="ui main container">
+	    <% for page in @getCollection("conflict").toJSON(): %>
+			<div class="ui raised issue segment">
+				<h4><a title="<%= page.title %>" href="<%= page.url %>">
+					<span class="ui <%= @statusC[page.status] %> ribbon label"> <%= page.status %> </span>
+					<span> <%= page.title %> </span>
+					<i class="linkify icon"></i>
+				</a></h4>
+				<span class="result"> 結果：<%= page.result %> </span>
+			</div>
+		<% end %>
+
+	    <% for page in @getCollection("resolved").toJSON(): %>
+			<div class="ui raised issue segment">
+				<h4><a title="<%= page.title %>" href="<%= page.url %>">
+					<span class="ui <%= @statusC[page.status] %> ribbon label"> <%= page.status %> </span>
+					<span> <%= page.title %> </span>
+					<i class="linkify icon"></i>
+				</a></h4>
+				<span class="result"> 結果：<%= page.result %> </span>
+			</div>
+		<% end %>
+
+	    <% for page in @getCollection("doing").toJSON(): %>
+			<div class="ui raised issue segment">
+				<h4><a title="<%= page.title %>" href="<%= page.url %>">
+					<span class="ui <%= @statusC[page.status] %> ribbon label"> <%= page.status %> </span>
+					<span> <%= page.title %> </span>
+					<i class="linkify icon"></i>
+				</a></h4>
+			</div>
+		<% end %>
+
+		<% for page in @getCollection("todo").toJSON(): %>
+			<div class="ui raised issue segment">
+				<h4><a title="<%= page.title %>" href="<%= page.url %>">
+					<span class="ui <%= @statusC[page.status] %> ribbon label"> <%= page.status %> </span>
+					<span> <%= page.title %> </span>
+					<i class="linkify icon"></i>
+				</a></h4>
+			</div>
+		<% end %>
+
+	</div>
+
+	<%- @getBlock("scripts").add(['/scripts/semantic.js']).toHTML() %>
+</body>
+</html>
+

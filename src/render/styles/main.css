@@ -1,0 +1,11 @@
+html {
+	font-size: 16px;
+}
+
+.ui.main.container {
+	margin-top: 7em;
+}
+
+.issue.segment .result {
+	margin-left: 5em;
+}

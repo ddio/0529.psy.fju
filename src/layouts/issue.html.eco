@@ -1,0 +1,79 @@
+<html>
+<head>
+	<title> <%= @document.title %> | 爭點 </title>
+	<%- @getBlock("meta").toHTML() %>
+    <%- @getBlock("styles").add(['/styles/semantic.css', '/styles/main.css']).toHTML() %>
+</head>
+<body>
+	<div class="ui fixed inverted menu">
+		<div class="ui container">
+			<div class="header item"> <%= @site.title %> </div>
+			<a class="item" href="/"> 所有爭點 </a>
+			<a class="item" href="/about.html"> 關於我 </a>
+		</div>
+	</div>
+	<div class="ui main container">
+	<div class="ui raised issue segment">
+		<h3>
+			<span class="ui <%= @statusC[@document.status] %> ribbon label"> <%= @document.status %> </span>
+			<span> <%= @document.title %> </span>
+		</h3>
+		<div class="ui list">
+			<div class="item">
+				<div class="header"> 原文 </div>
+				<div class="description"> <%= @document.src %> </div>
+			</div>
+			<% if @document.status == '已釐清' : %>
+				<div class="item">
+					<div class="header"> 結果 </div>
+					<div class="description"> <%= @document.result %> </div>
+				</div>
+				<div class="item">
+					<div class="header"> 解釋 </div>
+					<div class="description"> 
+						<ol>
+							<% for item in @document.reason: %>
+							<li> <%= item %> </li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+				<div class="item">
+					<div class="header"> 出處 </div>
+					<div class="description">
+						<ol>
+							<% for item in @document.reasonSrc: %>
+							<li> <%= item %> </li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			<% else if @document.status == '初步進展，待後續釐清': %>
+				<div class="item">
+					<div class="header"> 目前狀況 </div>
+					<div class="description"> 
+						<ol>
+							<% for item in @document.comment: %>
+							<li> <%= item %> </li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+				<div class="item">
+					<div class="header"> 出處 </div>
+					<div class="description"> 
+						<ol>
+							<% for item in @document.commentSrc: %>
+							<li> <%= item %> </li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+
+			<% end %>
+		</div>
+	</div>
+	</div>
+</body>
+
+</html>
