@@ -5,7 +5,7 @@
     <%- @getBlock("styles").add(['styles/semantic.css', 'styles/main.css']).toHTML() %>
 	<meta property="og:title" content="<%= @document.status %> | <%= @document.title %> | <%= @site.title %>"/>
 	<meta property="og:site_name" content="<%= @site.title %>"/>
-	<meta property="og:description" content="<%= if @document.status == '已釐清' then @document.result %>"/>
+	<meta property="og:description" content="<%= @document.result %>"/>
 	<meta property="og:image" content="http://ddio.github.io/0529.psy.fju/ogimage.png"/>
 </head>
 <body>
