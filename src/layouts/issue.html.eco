@@ -6,6 +6,7 @@
 	<meta property="og:title" content="<%= @document.status %> | <%= @document.title %> | <%= @site.title %>"/>
 	<meta property="og:site_name" content="<%= @site.title %>"/>
 	<meta property="og:description" content="<%= if @document.status == '已釐清' then @document.result %>"/>
+	<meta property="og:image" content="http://ddio.github.io/0529.psy.fju/ogimage.png"/>
 </head>
 <body>
 	<div class="ui fixed inverted menu">
@@ -24,39 +25,24 @@
 			<div class="ui very relaxed list">
 				<div class="item">
 					<div class="header"> 原文 </div>
-					<div class="description"> <%= @document.src %> </div>
+					<div class="description"> <%- @document.src %> </div>
 				</div>
-				<% if @document.status == '已釐清' : %>
+				<% if @document.status != '尚未核對': %>
 					<div class="item">
-						<div class="header"> 結果 </div>
-						<div class="description"> <%= @document.result %> </div>
-					</div>
-					<div class="item">
-						<div class="header"> 解釋 </div>
-						<div class="description"> 
-							<%- @document.reason %>
-						</div>
-					</div>
-					<div class="item">
-						<div class="header"> 出處 </div>
-						<div class="description">
-							<%- @document.reasonSrc %>
-						</div>
-					</div>
-				<% else if @document.status == '初步進展，待後續釐清': %>
-					<div class="item">
-						<div class="header"> 目前狀況 </div>
-						<div class="description"> 
-							<%- @document.comment %>
-						</div>
-					</div>
-					<div class="item">
-						<div class="header"> 出處 </div>
-						<div class="description"> 
-							<%- @document.commentSrc %>
-						</div>
+						<% if @document.status == '確認指控有誤' || @document.status == '確認無共識': %>
+							<div class="header"> 結果 </div>
+						<% else: %>
+							<div class="header"> 目前狀況 </div>
+						<% end %>
+						<div class="description"> <%- @document.result %> </div>
 					</div>
 				<% end %>
+				<div class="item">
+					<div class="header"> 出處 </div>
+					<div class="description">
+						<%- @document.reasonSrc %>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="ui basic segment">

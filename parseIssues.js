@@ -4,6 +4,8 @@ var _ = require('underscore');
 var marked = require('marked');
 
 var listItems = {
+	src: true,
+	result: true,
 	reason: true,
 	reasonSrc: true,
 	comment: true,

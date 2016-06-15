@@ -3,6 +3,7 @@
 	<title> <%= @site.title %> </title>
 	<%- @getBlock("meta").toHTML() %>
     <%- @getBlock("styles").add(['styles/semantic.css', 'styles/main.css']).toHTML() %>
+	<meta property="og:image" content="http://ddio.github.io/0529.psy.fju/ogimage.png"/>
 </head>
 <body>
 	<div class="ui fixed inverted menu">
@@ -15,71 +16,36 @@
 	<div class="ui main container">
 
 		<div class="ui basic segment">
-		<div class="ui statistics">
-			<div class="<%= @statusC['已釐清'] %> statistic">
-				<div class="value"><%= @getCollection('resolved').length %></div>
-				<div class="label">已釐清</div>
-			</div>
-			<div class="<%= @statusC['初步進展，待後續釐清'] %> statistic">
-				<div class="value"><%= @getCollection('doing').length %></div>
-				<div class="label">初步進展，待後續釐清</div>
-			</div>
-			<div class="<%= @statusC['尚未核對'] %> statistic">
-				<div class="value"><%= @getCollection('todo').length %></div>
-				<div class="label">尚未核對</div>
+			<div class="ui statistics">
+				<% for st in @status: %>
+				<a href="#<%= st.name %>">
+				<div class="<%= @statusC[st.name] %> statistic">
+					<div class="value"><%= @getCollection(st.c).length %></div>
+					<div class="label"><%= st.name %></div>
+				</div>
+				</a>
+				<% end %>
 			</div>
 		</div>
-		</div>
-
-		<div id="conflict">
-	    <% for page in @getCollection("conflict").toJSON(): %>
-			<div class="ui raised issue segment">
-				<h4><a title="<%= page.title %>" href="<%= page.basename %>">
-					<span class="ui <%= @statusC[page.status] %> ribbon label"> <%= page.status %> </span>
-					<span> <%= page.title %> </span>
-					<i class="linkify icon"></i>
-				</a></h4>
-				<span class="result"> 結果：<%= page.result %> </span>
+		<% for st in @status: %>
+			<div id="<%= st.name %>">
+		    <% for page in @getCollection(st.c).toJSON(): %>
+				<div class="ui raised issue segment">
+					<h4><a title="<%= page.title %>" href="<%= page.basename %>.html">
+						<span class="ui <%= @statusC[page.status] %> ribbon label"> <%= page.status %> </span>
+						<span> <%= page.title %> </span>
+						<i class="linkify icon"></i>
+					</a></h4>
+					<% if page.status == '確認無共識' || page.status == '確認指控有誤': %>
+						<div class="result"> 結果：<%- page.result %> </div>
+					<% else if page.status != '尚未核對' : %>
+						<div class="result"> 目前狀況：<%- page.result %> </div>
+					<% end %>
+				</div>
+			<% end %>
 			</div>
+			<div class="ui hidden divider"></div>
 		<% end %>
-		</div>
-
-		<div id="resolved">
-	    <% for page in @getCollection("resolved").toJSON(): %>
-			<div class="ui raised issue segment">
-				<h4><a title="<%= page.title %>" href="<%= page.basename %>.html">
-					<span class="ui <%= @statusC[page.status] %> ribbon label"> <%= page.status %> </span>
-					<span> <%= page.title %> </span>
-					<i class="linkify icon"></i>
-				</a></h4>
-				<span class="result"> 結果：<%= page.result %> </span>
-			</div>
-		<% end %>
-		</div>
-
-		<div id="doing">
-	    <% for page in @getCollection("doing").toJSON(): %>
-			<div class="ui raised issue segment">
-				<h4><a title="<%= page.title %>" href="<%= page.basename %>.html">
-					<span class="ui <%= @statusC[page.status] %> ribbon label"> <%= page.status %> </span>
-					<span> <%= page.title %> </span>
-					<i class="linkify icon"></i>
-				</a></h4>
-			</div>
-		<% end %>
-		</div>
-
-		<div id="todo">
-		<% for page in @getCollection("todo").toJSON(): %>
-			<div class="ui raised issue segment">
-				<h4><a title="<%= page.title %>" href="<%= page.basename %>.html">
-					<span class="ui <%= @statusC[page.status] %> ribbon label"> <%= page.status %> </span>
-					<span> <%= page.title %> </span>
-					<i class="linkify icon"></i>
-				</a></h4>
-			</div>
-		<% end %>
-		</div>
 
 		<div class="ui basic segment">
 			<div class="fb-comments" data-href="http://ddio.github.io/0529.psy.fju/index.html" data-width="100%"></div>
