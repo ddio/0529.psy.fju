@@ -4,8 +4,20 @@
 	<%- @getBlock("meta").toHTML() %>
     <%- @getBlock("styles").add(['styles/semantic.css', 'styles/main.css']).toHTML() %>
 	<meta property="og:image" content="http://ddio.github.io/0529.psy.fju/ogimage.png"/>
+	<meta property="og:url" content="http://ddio.github.io/0529.psy.fju/index.html" />
+	<meta property="fb:app_id" content="238718126925" />
 </head>
 <body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.6&appId=238718126925";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
 	<div class="ui fixed inverted menu">
 		<div class="ui container">
 			<div class="header item"> <%= @site.title %> </div>
@@ -51,16 +63,6 @@
 			<div class="fb-comments" data-href="http://ddio.github.io/0529.psy.fju/index.html" data-width="100%"></div>
 		</div>
 	</div>
-	<div id="fb-root"></div>
-
-	<script>(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) return;
-			js = d.createElement(s); js.id = id;
-			js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.6&appId=238718126925";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
 	<script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
