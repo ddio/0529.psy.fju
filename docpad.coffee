@@ -5,7 +5,7 @@
 docpadConfig = {
 	templateData:
 		site:
-			title: '輔大性侵事件爭點整理',
+			title: '輔大性侵事件當事人爭點整理',
 		status: [
 			{ name: '確認無共識', c: 'conflict' },
 			{ name: '確認指控正確', c: 'correct' },
