@@ -1,0 +1,27 @@
+html {
+	font-size: 18px;
+}
+
+body {
+	font-size: 16px;
+}
+
+.ui.main.container {
+	margin-top: 7em;
+	margin-bottom: 5em;
+}
+
+.issue.segment .result {
+	margin-left: 30px;
+}
+
+ol, ul, li {
+	margin-bottom: 6px;
+}
+
+.ui.statistics > a > .statistic {
+	display: inline-flex;
+	flex: 0 1 auto;
+	flex-direction: column;
+	margin: 0 1.5em 2em;
+}
